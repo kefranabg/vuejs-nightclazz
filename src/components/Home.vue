@@ -31,9 +31,6 @@ export default {
       favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
     }
   },
-  computed : {
-    
-  },
   components: {
     serie: Serie
   }
