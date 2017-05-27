@@ -12,8 +12,8 @@ export default {
     /**
      * Remove a favorite from the list
      */
-    removeFavorite: function(fav) { 
-        const index = this.list.findIndex(item => item.show.id === fav.show.id)
+    removeFavorite: function(fav) {
+        const index = this.list.findIndex(item => item.id === fav.id)
         this.list.splice(index, 1)
     }
 }
