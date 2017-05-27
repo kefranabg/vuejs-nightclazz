@@ -1,13 +1,30 @@
 <template>
-  <h1>{{msg}}</h1>
+  <div>
+    <h1>{{msg}}</h1>
+    <div class="container">
+      <ul class="list-group">
+        <serie v-for="fav in favorites" :data="fav.show"></serie>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
+import favoritesService from '@/services/favorites.service'
+import Serie from '@/components/Serie'
+
 export default {
-  data () {
+  data() {
     return {
-      msg: 'Hello Favorites'
+      msg: 'Hello Favorites',
+      favorites: []
     }
+  },
+  mounted() {
+    this.favorites = favoritesService.list
+  },
+  components: {
+    Serie
   }
 }
 </script>

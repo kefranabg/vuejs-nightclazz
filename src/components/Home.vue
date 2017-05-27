@@ -3,8 +3,7 @@
     <h1>{{msg}}</h1>
     <div class="container">
       <ul class="list-group">
-        <serie v-for="serie in series" :data="serie.show"></serie>
-
+        <serie class="pointer" v-for="serie in series" :data="serie.show" @click.native="toggleFav(serie)"></serie>
       </ul>
     </div>
   
@@ -13,6 +12,7 @@
 
 <script>
 import seriesService from '@/services/series.service'
+import favoritesService from '@/services/favorites.service'
 import Serie from '@/components/Serie'
 
 export default {
@@ -25,6 +25,12 @@ export default {
   created () {
     seriesService.getSeries().then(res => this.series = res.data)
   },
+  methods: {
+    toggleFav: function(serie) {
+      !favoritesService.list.find(item => item.show.id === serie.show.id) ? 
+      favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
+    }
+  },
   components: {
     serie: Serie
   }
@@ -32,5 +38,7 @@ export default {
 </script>
 
 <style scoped>
-
+.pointer {
+  cursor: pointer;
+}
 </style>
