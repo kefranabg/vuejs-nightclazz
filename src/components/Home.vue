@@ -3,7 +3,7 @@
     <h1>{{msg}}</h1>
     <div class="container">
       <ul class="list-group">
-        <serie class="pointer" v-for="serie in series" :data="serie.show" @click.native="toggleFav(serie)"></serie>
+        <serie class="pointer" v-for="serie in series" :data="serie" @clicked="toggleFav($event)"></serie>
       </ul>
     </div>
   
@@ -23,13 +23,16 @@ export default {
     }
   },
   created () {
-    seriesService.getSeries().then(res => this.series = res.data)
+    seriesService.getSeries().then(res => this.series = res.data.map(item => item.show))
   },
   methods: {
     toggleFav: function(serie) {
-      !favoritesService.list.find(item => item.show.id === serie.show.id) ? 
+      !favoritesService.list.find(item => item.id === serie.id) ? 
       favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
     }
+  },
+  computed : {
+    
   },
   components: {
     serie: Serie

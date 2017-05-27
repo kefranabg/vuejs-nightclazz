@@ -3,7 +3,7 @@
     <h1>{{msg}}</h1>
     <div class="container">
       <ul class="list-group">
-        <serie v-for="fav in favorites" :data="fav.show"></serie>
+        <serie v-for="fav in favorites" :data="fav"></serie>
       </ul>
     </div>
   </div>
@@ -23,6 +23,7 @@ export default {
   mounted() {
     this.favorites = favoritesService.list
   },
+
   components: {
     Serie
   }
