@@ -1,10 +1,10 @@
-import http from 'axios'
+import Vue from 'vue'
 
 export default {
     /**
      * Get series from tvmaze
      */
     getSeries: () => {
-        return http.get('http://api.tvmaze.com/search/shows?q=bad')
+        return Vue.http.get('http://api.tvmaze.com/search/shows?q=bad')
     }
 }
