@@ -2,11 +2,13 @@
   <div>
     <h1>{{msg}}</h1>
     <div class="container">
+      <div class="form-group">
+        <input type="text" v-model="search" class="form-control" placeholder="Rechercher ...">
+      </div>
       <ul class="list-group">
-        <serie class="pointer" v-for="serie in series" :data="serie" @clicked="toggleFav($event)"></serie>
+        <serie class="pointer" v-for="serie in filteredSeries" :data="serie" @clicked="toggleFav($event)"></serie>
       </ul>
     </div>
-  
   </div>
 </template>
 
@@ -16,23 +18,29 @@ import favoritesService from '@/services/favorites.service'
 import Serie from '@/components/Serie'
 
 export default {
-  data () {
+  data() {
     return {
       msg: 'Hello Home',
+      search: '',
       series: []
     }
   },
-  created () {
+  created() {
     seriesService.getSeries().then(res => this.series = res.data.map(item => item.show))
   },
   methods: {
-    toggleFav: function(serie) {
-      !favoritesService.list.find(item => item.id === serie.id) ? 
-      favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
+    toggleFav: function (serie) {
+      !favoritesService.list.find(item => item.id === serie.id) ?
+        favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
     }
   },
   components: {
     serie: Serie
+  },
+  computed: {
+    filteredSeries: function () {
+      return this.search === '' ? this.series : this.series.filter(serie => serie.name.toLowerCase().includes(this.search.toLowerCase()))
+    }
   }
 }
 </script>
