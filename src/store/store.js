@@ -18,8 +18,7 @@ export default new Vuex.Store({
      * Remove a favorite from the list
      */
     removeFavorite (state, fav) {
-        const index = state.favorites.findIndex(item => item.id === fav.id)
-        state.favorites = [...state.favorites.slice(0, index), ...state.favorites.slice(index + 1)]
+        state.favorites = state.favorites.filter(item => item.id !== fav.id)
     }
   }
 })
