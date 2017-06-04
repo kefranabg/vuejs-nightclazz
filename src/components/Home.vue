@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     toggleFav: function (serie) {
-      !favoritesService.list.find(item => item.id === serie.id) ?
-        favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
+      !this.$store.state.favorites.find(item => item.id === serie.id) ?
+        this.$store.commit('addFavorite', serie) : this.$store.commit('removeFavorite', serie)
     }
   },
   components: {

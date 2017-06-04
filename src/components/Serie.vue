@@ -32,7 +32,7 @@ export default {
     },
     computed: {
         isFav: function () {
-            return this.list.find(item => item.id === this.data.id)
+            return this.$store.state.favorites.find(item => item.id === this.data.id)
         }
     },
 }

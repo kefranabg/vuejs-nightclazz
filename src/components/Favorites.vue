@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted() {
-    this.favorites = favoritesService.list
+    this.favorites = this.$store.state.favorites
   },
 
   components: {
